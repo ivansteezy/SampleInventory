@@ -19,8 +19,10 @@ namespace Inventory {
     public:
         virtual std::size_t getAmount() const = 0;
         virtual void setAmount(std::size_t newAmount) = 0;
+        virtual void increaseAmount() = 0;
+        virtual void decreaseAmount() = 0;
         virtual std::string getName() const = 0;
-        virtual void setName(std::string name) = 0;
+        virtual void setName(const std::string& name) = 0;
         virtual ItemType getType() const = 0;
         virtual void useItem() const = 0;
     };

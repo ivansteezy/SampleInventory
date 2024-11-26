@@ -24,11 +24,19 @@ namespace Inventory {
             mAmount = newAmount;
         }
 
+        virtual void increaseAmount() override {
+            mAmount++;
+        }
+
+        virtual void decreaseAmount() override {
+            mAmount--;
+        }
+
         virtual std::string getName() const override {
             return mName;
         }
 
-        virtual void setName(std::string name) override {
+        virtual void setName(const std::string& name) override {
             mName = name;
         }
 
@@ -60,11 +68,19 @@ namespace Inventory {
             mAmount = newAmount;
         }
 
-        virtual std::string getName() const override {
-            return mName;
+        virtual void increaseAmount() override {
+            mAmount++;
         }
 
-        virtual void setName(std::string name) override {
+        virtual void decreaseAmount() override {
+            mAmount--;
+        }
+
+        virtual std::string getName() const override {
+            return "weapon";
+        }
+
+        virtual void setName(const std::string& name) override {
             mName = name;
         }
 
@@ -105,11 +121,19 @@ namespace Inventory {
             mAmount = newAmount;
         }
 
-        virtual std::string getName() const override {
-            return mName;
+        virtual void increaseAmount() override {
+            mAmount++;
         }
 
-        virtual void setName(std::string name) override {
+        virtual void decreaseAmount() override {
+            mAmount--;
+        }
+
+        virtual std::string getName() const override {
+            return "potion";
+        }
+
+        virtual void setName(const std::string& name) override {
             mName = name;
         }
 

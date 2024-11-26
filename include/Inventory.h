@@ -1,5 +1,6 @@
-#include <vector>
+#include <map>
 #include <iostream>
+#include <algorithm>
 
 #include "IInventory.h"
 
@@ -7,12 +8,17 @@ namespace Inventory {
     class Inventory : public IInventory{
     public:
 		virtual void addItem(IItemPtr item) override {
-            mItems.push_back(item);
+            auto it = mItems.find(item->getType());
+            if (it != mItems.end()) {
+                it->second.first++;
+            } else {
+                mItems.insert({item->getType(), {1, item}});
+            }
         }
 
 		virtual void printInventory() const override {
             for(const auto& a : mItems) {
-                std::cout << "Cantidad: [" << a->getAmount() << "] Nombre: [" << a->getName() << "]\n"; // magia del polimorfismo
+                std::cout << "Cantidad: [" << a.second.first << "] Nombre: [" << a.second.second->getName() << "]\n"; // magia del polimorfismo
             }
 
             std::cout << std::endl;
@@ -27,6 +33,6 @@ namespace Inventory {
         }
 
     private:
-        std::vector<IItemPtr> mItems;
+        std::map<ItemType, std::pair<int, IItemPtr>> mItems;
     };
 }
