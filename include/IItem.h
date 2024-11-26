@@ -14,6 +14,40 @@ namespace Inventory {
         Money
     };
 
+    std::ostream& operator<<(std::ostream& os, const ItemType& type) {
+        switch (type)
+        {
+        case ItemType::Generic:
+            os << "Generic";
+            break;
+        case ItemType::Weapon:
+            os << "Weapon";
+            break;
+        case ItemType::Equipment:
+            os << "Equipment";
+            break;
+        case ItemType::Potion:
+            os << "Potion";
+            break;
+        case ItemType::CraftingMaterials:
+            os << "CraftingMaterials";
+            break;
+        case ItemType::Quest:
+            os << "Quest";
+            break;
+        case ItemType::Cosmetics:
+            os << "Cosmetics";
+            break;
+        case ItemType::Money:
+            os << "Money";
+            break;
+        default:
+            os << "Unsupported value for ItemType: " << static_cast<int>(type);
+            break;
+        }
+        return os;
+    }
+
     // to do: const correctness..
     class IItem {
     public:

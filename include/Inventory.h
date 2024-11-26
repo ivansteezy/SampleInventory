@@ -47,6 +47,7 @@ namespace Inventory {
                 for(const auto& a : inventory.getInventory()) {
                     os << "Cantidad: [" << a.second.first 
                        << "] Nombre: [" << a.second.second->getName() 
+                       << "] Tipo: [" << a.second.second->getType() 
                        << "]\n";
                 }
                 os << std::endl;
@@ -54,7 +55,7 @@ namespace Inventory {
                 for(const auto& i : inventory.getInventory()) {
                     os << i.second.first << "," 
                        << i.second.second->getName() << "," 
-                       << static_cast<int>(i.second.second->getType());
+                       << i.second.second->getType();
                 }
             }
             return os;
