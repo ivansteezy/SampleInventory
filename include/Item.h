@@ -107,7 +107,7 @@ namespace Inventory {
         std::size_t mWearCounter;
         ItemUsage mCallable;
     };
-
+    
     template<ItemInvokable ItemUsage>
     class Item<ItemUsage, ItemType::Potion> : public IItem {
     public:

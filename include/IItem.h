@@ -15,8 +15,7 @@ namespace Inventory {
     };
 
     std::ostream& operator<<(std::ostream& os, const ItemType& type) {
-        switch (type)
-        {
+        switch (type) {
         case ItemType::Generic:
             os << "Generic";
             break;
@@ -48,7 +47,6 @@ namespace Inventory {
         return os;
     }
 
-    // to do: const correctness..
     class IItem {
     public:
         virtual std::size_t getAmount() const = 0;

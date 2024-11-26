@@ -27,4 +27,6 @@ int main() {
     inventory->addItem(bluePotion);
 
     inventory->printInventory();
+    inventory->loadInventoryFromFile("inventory.txt", ',');
+    // inventory->saveInventoryIntoFile("inventory.txt");
 }

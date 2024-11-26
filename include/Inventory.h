@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
+#include <ranges>
+#include <vector>
 
 #include "IInventory.h"
 
@@ -26,6 +28,7 @@ namespace Inventory {
             if (file.is_open()) {
                 file << *this;
                 file.close();
+                std::cout << "Successfully write to file" << std::endl;
                 return true;
             } else {
                 std::cerr << "Error: Can not open file to write inventory" << std::endl;
@@ -33,8 +36,26 @@ namespace Inventory {
             }
         }
 
-		virtual bool loadInventoryFromFile(const std::string& fileName) override {
-            auto x  = fileName;
+		virtual bool loadInventoryFromFile(const std::string& fileName, char delimiter) override {
+            std::ifstream file(fileName);
+            if (!file) {
+                std::cerr << "Error: Can not open file to read inventory\n";
+                return false;
+            }
+
+            std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+            auto splitByDelimiter = content | std::views::split(delimiter)
+                                            | std::views::transform([](auto &&range){
+                                                return std::string(range.begin(), range.end());
+                                            });
+
+            std::vector<std::string> items(splitByDelimiter.begin(), splitByDelimiter.end());
+
+            for(const auto& item : items) {
+                std::cout << item << "\n";
+            }
+
             return true;
         }
 
@@ -55,7 +76,7 @@ namespace Inventory {
                 for(const auto& i : inventory.getInventory()) {
                     os << i.second.first << "," 
                        << i.second.second->getName() << "," 
-                       << i.second.second->getType();
+                       << i.second.second->getType() << "\n";
                 }
             }
             return os;
