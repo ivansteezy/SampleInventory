@@ -1,4 +1,7 @@
 #pragma once
+
+#include <iostream>
+
 #include "IItem.h"
 #include "Player.h"
 
@@ -6,8 +9,10 @@ namespace Inventory {
     template<typename T>
     concept ItemInvokable = std::invocable<T>;
 
+    // Generic/fallback template
     template<ItemInvokable ItemUsage, ItemType Type>
     class Item : public IItem {
+        static_assert(Type == ItemType::Generic, "Please implement specialization for that type"); // fallback for not supported types, werid looking huh?
     public:
         explicit Item(ItemUsage i) : mCallable(i) {}
 
@@ -20,6 +25,7 @@ namespace Inventory {
         }
 
         virtual void useItem() const override {
+            std::cout << "Generic!" << std::endl;
             mCallable();
         }
 

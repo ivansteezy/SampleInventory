@@ -3,6 +3,7 @@
 
 namespace Inventory {
     enum class ItemType {
+        Generic,
         Weapon,
         Equipment,
         Consumables,
